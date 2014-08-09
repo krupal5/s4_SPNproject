@@ -2,7 +2,6 @@ package spn_test;
 
 public class ClassInfo {
 	
-	private int deptid;
 	private int capacity;
 	private int room_num = 0;
 	private long semester = 0;
@@ -11,6 +10,8 @@ public class ClassInfo {
 	private String profName = "";
 	private String building = "";
 	private String cid = "";
+	private String did = "";
+	private String courseName = "";
 
 	public int getCid(){
 		return Integer.parseInt(cid);
@@ -21,7 +22,11 @@ public class ClassInfo {
 	}
 	
 	public int getDeptid(){
-		return deptid;
+		return Integer.parseInt(did);
+	}
+	
+	public String getStringDeptid(){
+		return did;
 	}
 	
 	public int getCapacity(){
@@ -48,12 +53,16 @@ public class ClassInfo {
 		return end_time;
 	}
 	
+	public String getCoursename(){
+		return courseName;
+	}
+	
 	public void setCid(String c){
 		this.cid = c;
 	}
 	
-	public void setDeptid(int d){
-		this.deptid = d;
+	public void setDeptid(String d){
+		this.did = d;
 	}
 	
 	public void setCapacity(int cap){
@@ -82,5 +91,9 @@ public class ClassInfo {
 	
 	public void setProfName(String name){
 		this.profName = name;
+	}
+	
+	public void setCourseName(String cname){
+		this.courseName = cname;
 	}
 }

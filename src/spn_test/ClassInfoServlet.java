@@ -43,14 +43,17 @@ public class ClassInfoServlet extends HttpServlet {
 		ClassInfoDAO dao = new ClassInfoDAO();
 		ArrayList<ClassInfo> clist = dao.getClassesByProf();
 		int clen = clist.size();
-		String par = "";
+		String par1 = "";
+		String par2 = "";
 		for(int i = 0; i < clen; i++){
-			par = clist.get(i).getStringCid();
-			if(request.getParameter("" + par)!=null)
+			par1 = clist.get(i).getStringDeptid();
+			par2 = clist.get(i).getStringCid();
+			if(request.getParameter(par1 + " : " + par2)!=null){
+				request.setAttribute("Sel", clist.get(i).getCoursename());
 				break;
+			}
 		}
 		request.setAttribute("formAction", "getTheInfo");
-		request.setAttribute("Sel", par);
 		RequestDispatcher rd = request.getRequestDispatcher("/ClassInfoPage.jsp");
         rd.forward(request, response); 
 	}

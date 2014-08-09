@@ -27,12 +27,13 @@ public class ClassInfoDAO {
 				cInfo.setCid(rs.getString("c_id"));
 				cInfo.setBuilding(rs.getString("building"));
 				cInfo.setCapacity(Integer.parseInt(rs.getString("capacity")));
-				cInfo.setDeptid(Integer.parseInt(rs.getString("dept_id")));
+				cInfo.setDeptid(rs.getString("dept_id"));
 				cInfo.setEnd(rs.getString("end_time"));
 				cInfo.setStart(rs.getString("start_time"));
 				cInfo.setProfName("Yvette Buchana");
 				cInfo.setSem(Long.parseLong(rs.getString("semester")));
 				cInfo.setRoomNum(Integer.parseInt(rs.getString("room_num")));
+				cInfo.setCourseName(rs.getString("c_name"));;
 				classList.add(cInfo);
 			}
 		}
