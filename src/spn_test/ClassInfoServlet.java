@@ -49,7 +49,7 @@ public class ClassInfoServlet extends HttpServlet {
 			par1 = clist.get(i).getStringDeptid();
 			par2 = clist.get(i).getStringCid();
 			if(request.getParameter(par1 + " : " + par2)!=null){
-				request.setAttribute("Sel", clist.get(i).getCoursename());
+				request.setAttribute("Sel", clist.get(i));
 				break;
 			}
 		}

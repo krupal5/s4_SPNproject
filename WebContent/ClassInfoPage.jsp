@@ -8,9 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<div style="position: absolute; top: 50px; left: 25px; width: 100px; height: 250px; max-height: 250px; border: 1px solid red; overflow: scroll">
+<body bgcolor = "f6f1f0">
+	<div style="position: absolute; top: 100px; left: 25px; width: 100px; border-radius: 15px;
+		height: 300px; border: 1px solid red; background-color:white; overflow: scroll">
+		<h3 style = "text-align: center; margin: 4px">Classes</h3>
 		<form action="/Spn_project/ClassInfoServlet" method="POST">
+		
 			<%
 				ClassInfoDAO dao = new ClassInfoDAO();
 				ArrayList<ClassInfo> clist = dao.getClassesByProf();
@@ -19,25 +22,52 @@
 					for (int count = 0; count < len; count++) {
 			%>
 
-			<input
-				style="height: 30px; width: 100px; font-size: 14px; border: 0; outline: #00FF00 solid 4px;"
-				type="submit" name="<%=clist.get(count).getDeptid() %> : <%=clist.get(count).getCid()%>"
-				value="<%=clist.get(count).getDeptid() %> : <%=clist.get(count).getCid()%>">
+			<input style="height: 40px; width: 100px; font-size: 14px; border: 0; 
+			outline: #00FF00 solid 4px;" type="submit"
+			name="<%=clist.get(count).getDeptid()%> : <%=clist.get(count).getCid()%>"
+			value="<%=clist.get(count).getDeptid()%> : <%=clist.get(count).getCid()%>" >
+			
 			<%
 					}
 				}
 			%>
+			
 		</form>
 	</div>
+		
+	<div style="height: 500px; margin: 20px 50px 100px 65px; 
+	border: 1px solid red; background-color: #f4f4ef">
+	
 	<%
-		String selec = (String) request.getAttribute("Sel");
-		if (selec != null) { %>
-	<div style = "height: 500px; ; margin: 50px 100px 100px 150px; background-color: #f4f4ef;"> 
-		<h1 style = "text-align: center; margin-bottom: 1px;">
-		<%=selec %>
-		</h1>
-	</div>
-		<% } %>
+		ClassInfo selec = (ClassInfo) request.getAttribute("Sel");
+		if (selec != null) {
+	%>
+		<h1 style="text-align: center;">
+			<%=selec.getCoursename()%></h1>
+		<h2 style="text-align: center; margin: 0">
+			01:<%=selec.getDeptid()%>:<%=selec.getCid()%></h2>
+		<div style="height: 250px; margin: 25px 50px 100px 100px">
+			<p>
+				<strong>Prerequisites: </strong>
+			</p>
+			<p>
+				<strong>Building:  </strong>
+				<%=selec.getBuilding()%></p>
+			<p>
+				<strong>Room Number:  </strong>
+				<%=selec.getRoomNum() %></p>
+			<p>
+				<strong>Room Capacity:  </strong>
+				<%=selec.getCapacity()%></p>
+			<p>
+				<strong>Class Timing:  </strong>
+				<%=selec.getStart()%> - <%=selec.getEnd() %>
+			</p>
+		</div>
+		<%
+		}
+	%>
 
+	</div>
 </body>
 </html>
