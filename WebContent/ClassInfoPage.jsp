@@ -65,6 +65,7 @@
 				<strong>Class Timing:  </strong>
 				<%=selec.getStart()%> - <%=selec.getEnd() %>
 			</p>
+			
 			<form action="/Spn_project/ClassInfoLoad.jsp">
 			Generate Special Permission Numbers:
 			<input style = "width: 75px" type="number" name="quantity" min="1" max="5">

@@ -3,25 +3,10 @@ package spn_test;
 public class LoginBean {
     private String username;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String userType;
+
     public boolean valid;
-    public String getFirstName()
-    {
-        return firstName;
-    }
-    public void setFirstName(String newFirstName)
-    {
-        firstName = newFirstName;
-    }
-    public String getLastName()
-    {
-        return lastName;
-    }
-    public void setLastName(String newLastName)
-    {
-        lastName = newLastName;
-    }
+    
     public String getPassword()
     {
         return password;
@@ -37,6 +22,12 @@ public class LoginBean {
     public void setUserName(String newUsername)
     {
         username = newUsername;
+    }
+    public String getUserType(){
+    	return this.userType;
+    }
+    public void setUserType(String uT){
+    	userType = uT;
     }
     public boolean isValid()
     {

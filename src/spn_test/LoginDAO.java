@@ -6,40 +6,42 @@ import java.sql.Statement;
  
 public class LoginDAO
 {
-static Connection currentCon = null;
-static ResultSet rs = null;
-public static LoginBean login(LoginBean bean)
-{
-Statement stmt = null;
-String username = bean.getUsername();
-String password = bean.getPassword();
-String searchQuery = "select * from professor where p_name ='" + username + "' AND password ='" + password + "'";
- 
-try
-{
-//connecting to the DB
-currentCon = ConnectionManager.getConnection();
-stmt=currentCon.createStatement();
-rs = stmt.executeQuery(searchQuery);
-boolean userExists = rs.next();
- 
-if (!userExists)
-{
-System.out.println("Username/Password entered is Incorrect or User doesnot Exists.");
-bean.setValid(false);
-}
-else if (userExists)
-{
-String fullName = rs.getString("p_name");
-System.out.println("Welcome " + fullName);
-bean.setValid(true);
-}
- 
-}
-catch (Exception ex)
-{
-System.out.println("Log In failed: An Exception has occurred! " + ex);
-}
-return bean;
-}
+	static Connection currentCon = null;
+	static ResultSet rs = null;
+	public static LoginBean login(LoginBean bean)
+	{
+		Statement stmt = null;
+		String username = bean.getUsername();
+		String password = bean.getPassword();
+		String userType = bean.getUserType();
+		String searchQuery = "select * from " + userType +  " where " + userType.charAt(0) + "_name ='" 
+		+ username + "' AND password ='" + password + "'";
+
+		try
+		{
+			//connecting to the DB
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery(searchQuery);
+			boolean userExists = rs.next();
+
+			if (!userExists)
+			{
+				System.out.println("Username/Password entered is Incorrect or User doesnot Exists.");
+				bean.setValid(false);
+			}
+			else if (userExists)
+			{
+				String fullName = rs.getString("p_name");
+				System.out.println("Welcome " + fullName);
+				bean.setValid(true);
+			}
+
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		return bean;
+	}
 }

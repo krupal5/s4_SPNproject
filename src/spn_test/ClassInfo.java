@@ -1,5 +1,7 @@
 package spn_test;
 
+import java.util.Random;
+
 public class ClassInfo {
 	
 	private int capacity;
@@ -12,6 +14,8 @@ public class ClassInfo {
 	private String cid = "";
 	private String did = "";
 	private String courseName = "";
+	private long[] spn;
+	private int counter = 0;
 
 	public int getCid(){
 		return Integer.parseInt(cid);
@@ -67,6 +71,7 @@ public class ClassInfo {
 	
 	public void setCapacity(int cap){
 		this.capacity = cap;
+		this.spn = new long[this.capacity];
 	}
 	
 	public void setRoomNum(int room){
@@ -96,4 +101,25 @@ public class ClassInfo {
 	public void setCourseName(String cname){
 		this.courseName = cname;
 	}
+	
+	public long generateSPN(){
+		Random r = new Random();
+		return 10000 + r.nextInt(80000);
+	}
+	
+	public boolean isNew(long num){
+		int len = this.spn.length;
+		for(int x = 0; x < len; x++){
+			if(this.spn[x] == num)
+				return false;
+		}
+		this.spn[this.counter] = num;
+		this.counter++;
+		return true;
+	}
+	
+	public int getCounter(){
+		return this.counter;
+	}
+			
 }

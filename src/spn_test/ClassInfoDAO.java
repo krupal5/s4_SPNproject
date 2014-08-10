@@ -9,10 +9,11 @@ public class ClassInfoDAO {
 	
 	static Connection conn = null;
 	static ResultSet rs = null;
+	ArrayList<ClassInfo> classList;
 	
 	public ArrayList<ClassInfo> getClassesByProf(String pname){
 
-		ArrayList<ClassInfo> classList = new ArrayList<ClassInfo>();
+		classList = new ArrayList<ClassInfo>();
 		conn = ConnectionManager.getConnection();
 		String sql = "select * from class, course where course.c_id = class.c_id and exists "
 				+ "(select c_id from professor, teaching where p_name = '" + pname + "')";
@@ -40,5 +41,20 @@ public class ClassInfoDAO {
 
 		return classList;
 	}
-
+	
+	public boolean createNewSPN(int howMany, String class_id){
+		
+		if(classList == null){
+			return false;
+		}
+		String temp_cid;
+		for(int h = 0; h < howMany; h++){
+			for(ClassInfo temp: classList){
+				if(temp.getStringCid().equals(class_id)){
+					
+				}
+			}
+		}
+		return true;
+	}
 }
