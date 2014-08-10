@@ -13,7 +13,7 @@ public static LoginBean login(LoginBean bean)
 Statement stmt = null;
 String username = bean.getUsername();
 String password = bean.getPassword();
-String searchQuery = "select * from student where s_name ='" + username + "' AND password ='" + password + "'";
+String searchQuery = "select * from professor where p_name ='" + username + "' AND password ='" + password + "'";
  
 try
 {
@@ -30,7 +30,7 @@ bean.setValid(false);
 }
 else if (userExists)
 {
-String fullName = rs.getString("s_name");
+String fullName = rs.getString("p_name");
 System.out.println("Welcome " + fullName);
 bean.setValid(true);
 }

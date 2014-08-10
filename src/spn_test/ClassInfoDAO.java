@@ -5,22 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
 public class ClassInfoDAO {
 	
 	static Connection conn = null;
 	static ResultSet rs = null;
 	
-	public ArrayList<ClassInfo> getClassesByProf(){
+	public ArrayList<ClassInfo> getClassesByProf(String pname){
 
 		ArrayList<ClassInfo> classList = new ArrayList<ClassInfo>();
 		conn = ConnectionManager.getConnection();
-		PreparedStatement ps = null;
-		String sql = "select * from class, course where course.c_id = class.c_id " + 
-				"and exists (select c_id from professor, teaching where p_name = 'Yvette Buchanan')";
-
+		String sql = "select * from class, course where course.c_id = class.c_id and exists "
+				+ "(select c_id from professor, teaching where p_name = '" + pname + "')";
 		try{
-			ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				ClassInfo cInfo = new ClassInfo();

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -41,7 +42,9 @@ public class ClassInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		ClassInfoDAO dao = new ClassInfoDAO();
-		ArrayList<ClassInfo> clist = dao.getClassesByProf();
+		HttpSession session = request.getSession(true);
+		LoginBean lb = (LoginBean)session.getAttribute("currentSessionUser");
+		ArrayList<ClassInfo> clist = dao.getClassesByProf(lb.getUsername());
 		int clen = clist.size();
 		String par1 = "";
 		String par2 = "";

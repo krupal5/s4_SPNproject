@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, spn_test.ClassInfoDAO, spn_test.ClassInfo"%>
+	import="java.util.ArrayList, spn_test.LoginBean, spn_test.ClassInfoDAO, spn_test.ClassInfo"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +16,9 @@
 		
 			<%
 				ClassInfoDAO dao = new ClassInfoDAO();
-				ArrayList<ClassInfo> clist = dao.getClassesByProf();
+				LoginBean sesUser = (LoginBean)session.getAttribute("currentSessionUser");
+				request.setAttribute("User", sesUser.getUsername());
+				ArrayList<ClassInfo> clist = dao.getClassesByProf(sesUser.getUsername());
 				if (clist != null) {
 					int len = clist.size();
 					for (int count = 0; count < len; count++) {
@@ -63,7 +65,12 @@
 				<strong>Class Timing:  </strong>
 				<%=selec.getStart()%> - <%=selec.getEnd() %>
 			</p>
+			<form action="/Spn_project/ClassInfoLoad.jsp">
+			Generate Special Permission Numbers:
+			<input style = "width: 75px" type="number" name="quantity" min="1" max="5">
+			</form>
 		</div>
+	
 		<%
 		}
 	%>
